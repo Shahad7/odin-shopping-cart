@@ -5,14 +5,14 @@ import Footer from "./Footer";
 import { useState } from "react";
 
 function Main() {
-    const [games, setGames] = useState([]);
-    function setData(data) {
-        setGames(data);
+    const [cart, setCart] = useState([]);
+    function addToCart(data) {
+        setCart([...cart, data]);
     }
     return (
         <div id="main">
-            <Navbar />
-            <Outlet context={[games, setData]} />
+            <Navbar cart={cart} />
+            <Outlet context={addToCart} />
             <Footer />
         </div>
     );

@@ -20,9 +20,6 @@ const router = createBrowserRouter([
             },
             {
                 path: "shop/:gameId",
-                loader: ({ params }) => {
-                    return {};
-                },
                 element: <GameInfo />,
             },
         ],

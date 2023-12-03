@@ -1,10 +1,10 @@
 import "../index.css";
 import { useState, useEffect } from "react";
 import Card from "./Card";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 function Shop() {
-    const [games, setData] = useOutletContext();
+    const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -14,7 +14,7 @@ function Shop() {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://api.rawg.io/api/games?key=9932e90df0a143d2a577d6c23771f864&page_size=4&page=1"
+                    "https://api.rawg.io/api/games?key=9932e90df0a143d2a577d6c23771f864&page_size=3&page=1"
                 );
                 if (response.status >= 400)
                     throw new Error("couldn't fetch data");
@@ -39,7 +39,7 @@ function Shop() {
         };
     }, []);
 
-    const listGames = games.map((elt) => (
+    const listGames = data.map((elt) => (
         <Card
             key={elt.id}
             id={elt.id}
