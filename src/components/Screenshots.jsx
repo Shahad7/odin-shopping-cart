@@ -1,7 +1,7 @@
 import "../index.css";
 import { useState, useEffect } from "react";
 
-function Screenshots({ gameId }) {
+function Screenshots({ gameId, cartVisibility }) {
     const [pics, setPics] = useState([]);
     const [imageIndex, setImageIndex] = useState(0);
     useEffect(() => {

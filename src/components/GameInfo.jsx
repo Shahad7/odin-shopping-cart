@@ -7,7 +7,8 @@ function GameInfo() {
     const [info, setInfo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const addToCart = useOutletContext();
+    const [addToCart, toggleCartVisibility, cartVisibility] =
+        useOutletContext();
 
     useEffect(() => {
         async function fetchInfo() {
@@ -36,6 +37,7 @@ function GameInfo() {
             id: gameId,
             count: 1,
         });
+        toggleCartVisibility();
     }
 
     return (
@@ -47,7 +49,10 @@ function GameInfo() {
             ) : (
                 <>
                     <p>{info.name}</p>
-                    <Screenshots gameId={gameId} />
+                    <Screenshots
+                        cartVisibility={cartVisibility}
+                        gameId={gameId}
+                    />
                     <div style={{ whiteSpace: "pre" }}>
                         {info.description
                             .split(/<br\s*\/?>|<p>/gi)

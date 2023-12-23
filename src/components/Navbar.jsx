@@ -1,24 +1,21 @@
 import "../index.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import CartItem from "./CartItem";
 
-function Navbar({ cart }) {
-    const [cartVisibility, setCartVisibility] = useState(false);
-    function toggleCartVisibility() {
-        setCartVisibility(!cartVisibility);
-    }
-
-    const listCartItems = cart.map((elt) => (
-        <CartItem key={elt.id} itemInfo={elt} />
-    ));
+function Navbar({ cart, toggleCartVisibility, cartVisibility }) {
     return (
         <>
             <nav id="navbar">
-                <Link to="/" style={{ marginRight: "10px" }}>
+                <Link
+                    to={cartVisibility ? "#" : "/"}
+                    style={{ marginRight: "10px" }}
+                >
                     Home
                 </Link>
-                <Link to="shop" style={{ marginRight: "10px" }}>
+                <Link
+                    to={cartVisibility ? "#" : "shop"}
+                    style={{ marginRight: "10px" }}
+                >
                     Shop
                 </Link>
                 <button
@@ -29,12 +26,6 @@ function Navbar({ cart }) {
                 </button>
                 <span>cart: {cart.length}</span>
             </nav>
-            {cartVisibility ? (
-                <div id="cart">
-                    <button onClick={toggleCartVisibility}> close</button>
-                    {listCartItems}
-                </div>
-            ) : null}
         </>
     );
 }
