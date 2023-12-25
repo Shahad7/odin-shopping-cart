@@ -35,7 +35,6 @@ function GameInfo() {
             name: info.name,
             image: info.background_image,
             id: gameId,
-            count: 1,
         });
         toggleCartVisibility();
     }

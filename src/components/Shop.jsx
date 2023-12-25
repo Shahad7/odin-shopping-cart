@@ -20,9 +20,7 @@ function Shop() {
                     throw new Error("couldn't fetch data");
                 const data = await response.json();
                 const games = data.results;
-                //console.log(games);
                 if (!ignore) {
-                    //alert("available");
                     setData(games);
                 }
             } catch (error) {

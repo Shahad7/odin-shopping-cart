@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function Navbar({ cart, toggleCartVisibility, cartVisibility }) {
+    let length = 0;
+    function cartLength() {
+        for (let item of cart) {
+            length += item.count;
+        }
+    }
+    cartLength();
     return (
         <>
             <nav id="navbar">
@@ -24,7 +31,7 @@ function Navbar({ cart, toggleCartVisibility, cartVisibility }) {
                 >
                     cart
                 </button>
-                <span>cart: {cart.length}</span>
+                <span>cart: {length}</span>
             </nav>
         </>
     );

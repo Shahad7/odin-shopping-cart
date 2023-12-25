@@ -4,51 +4,85 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useState } from "react";
 import CartItem from "./CartItem";
+import Cart from "./Cart";
 
 function Main() {
     const [cart, setCart] = useState([]);
     function addToCart(data) {
-        setCart([...cart, data]);
+        let found = 0;
+        for (let item of cart) {
+            if (item.id == data.id) {
+                let newCart = cart.filter((elt) => elt.id != item.id);
+                setCart([...newCart, { ...item, count: item.count + 1 }]);
+                found = 1;
+                break;
+            }
+        }
+        if (!found) setCart([...cart, { ...data, count: 1 }]);
     }
     const [cartVisibility, setCartVisibility] = useState(false);
-    function toggleCartVisibility() {
-        document.getElementById("main").style.pointerEvents = "none";
-        if (document.getElementById("main").style.filter == "blur(2px)")
-            document.getElementById("main").style.filter = "none";
-        else document.getElementById("main").style.filter = "blur(2px)";
+
+    function showCart() {
+        let main = document.getElementById("main");
+        main.style.pointerEvents = "none";
+        main.style.filter = "blur(2px)";
         setCartVisibility((prevState) => !prevState);
     }
 
-    function handleCartVisibility(e) {
-        document.getElementById("main").style.pointerEvents = "auto";
+    function hideCart() {
+        let main = document.getElementById("main");
+        main.style.pointerEvents = "auto";
+        main.style.filter = "none";
+        setCartVisibility((prevState) => !prevState);
+    }
 
+    function handleBodyClick(e) {
         if (cartVisibility) {
-            document.getElementById("main").style.filter = "none";
-            setCartVisibility(false);
+            if (e.target.id == "wrapper") {
+                hideCart();
+            }
         }
     }
 
-    const listCartItems = cart.map((elt) => (
-        <CartItem key={elt.id} itemInfo={elt} />
-    ));
+    function toggleCartVisibility() {
+        if (cartVisibility) hideCart();
+        else showCart();
+    }
+
+    function changeCount(id, count) {
+        for (let item of cart) {
+            if (item.id == id) {
+                let newCart = cart.filter((elt) => elt.id != item.id);
+                setCart([...newCart, { ...item, count: count }]);
+            }
+        }
+    }
+
     return (
         <>
-            <div id="main" onClick={handleCartVisibility}>
-                <Navbar
-                    cart={cart}
-                    cartVisibility={cartVisibility}
-                    toggleCartVisibility={toggleCartVisibility}
-                />
-                <Outlet
-                    context={[addToCart, toggleCartVisibility, cartVisibility]}
-                />
-                <Footer />
+            <div id="wrapper" onClick={handleBodyClick}>
+                <div id="main">
+                    <Navbar
+                        cart={cart}
+                        cartVisibility={cartVisibility}
+                        toggleCartVisibility={toggleCartVisibility}
+                    />
+                    <Outlet
+                        context={[
+                            addToCart,
+                            toggleCartVisibility,
+                            cartVisibility,
+                        ]}
+                    />
+                    <Footer />
+                </div>
             </div>
             {cartVisibility ? (
-                <div id="cart">
-                    <button onClick={toggleCartVisibility}> close</button>
-                    {listCartItems}
-                </div>
+                <Cart
+                    toggleCartVisibility={toggleCartVisibility}
+                    cart={cart}
+                    changeCount={changeCount}
+                />
             ) : null}
         </>
     );
