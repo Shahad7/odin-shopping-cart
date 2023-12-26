@@ -19,7 +19,10 @@ function GameInfo() {
                 if (response.status >= 400)
                     throw new Error("couldn't fetch game details");
                 const data = await response.json();
-                setInfo(data);
+                setInfo({
+                    ...data,
+                    price: parseInt(data.id.toString().slice(1, 2)) * 6 + 99.99,
+                });
             } catch (err) {
                 console.error(err);
                 setError(err);
@@ -35,19 +38,20 @@ function GameInfo() {
             name: info.name,
             image: info.background_image,
             id: gameId,
+            price: info.price,
         });
         toggleCartVisibility();
     }
 
     return (
-        <div id="game-info">
+        <div className="main-body" id="game-info">
             {error ? (
                 <p>{error.message}</p>
             ) : loading ? (
                 <p>loading...</p>
             ) : (
                 <>
-                    <p>{info.name}</p>
+                    <p>{info.name + "\t\t" + "$" + info.price}</p>
                     <Screenshots
                         cartVisibility={cartVisibility}
                         gameId={gameId}

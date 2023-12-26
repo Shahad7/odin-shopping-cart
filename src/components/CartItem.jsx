@@ -1,7 +1,7 @@
 import "../index.css";
 import { useState } from "react";
 
-function CartItem({ itemInfo, changeCount }) {
+function CartItem({ itemInfo, changeCount, deleteCartItem }) {
     const [count, setCount] = useState(itemInfo.count);
 
     function increaseCount() {
@@ -12,7 +12,7 @@ function CartItem({ itemInfo, changeCount }) {
     function decreaseCount() {
         if (count != 1) {
             changeCount(itemInfo.id, count - 1);
-            setCount(count + 1);
+            setCount(count - 1);
         }
     }
     return (
@@ -22,6 +22,14 @@ function CartItem({ itemInfo, changeCount }) {
             <button onClick={decreaseCount}>-</button>
             <p className="cart-item-count">{count}</p>
             <button onClick={increaseCount}>+</button>
+            {/*gotta replace this a trash icon later*/}
+            <button
+                onClick={() => {
+                    deleteCartItem(itemInfo.id);
+                }}
+            >
+                delete
+            </button>
         </div>
     );
 }

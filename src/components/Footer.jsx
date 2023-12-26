@@ -2,9 +2,12 @@ import "../index.css";
 
 function Footer() {
     return (
-        <p style={{ backgroundColor: "black", color: "white" }}>
-            footer content goes here
-        </p>
+        <div id="footer">
+            <p>
+                Project made by <a href="https://github.com/Shahad7">Shahad7</a>{" "}
+                using <a href="https://rawg.io/apidocs">RAWG API</a>
+            </p>
+        </div>
     );
 }
 

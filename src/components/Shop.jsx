@@ -14,7 +14,7 @@ function Shop() {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://api.rawg.io/api/games?key=9932e90df0a143d2a577d6c23771f864&page_size=3&page=1"
+                    "https://api.rawg.io/api/games?key=9932e90df0a143d2a577d6c23771f864&page_size=9&page=1"
                 );
                 if (response.status >= 400)
                     throw new Error("couldn't fetch data");
@@ -43,11 +43,15 @@ function Shop() {
             id={elt.id}
             name={elt.name}
             image={elt.background_image}
+            price={(
+                parseInt(elt.id.toString().slice(1, 2)) * 6 +
+                99.99
+            ).toFixed(2)}
         />
     ));
 
     return (
-        <div id="shop">
+        <div className="main-body" id="shop">
             {error ? (
                 <p>{error.message}</p>
             ) : !loading ? (

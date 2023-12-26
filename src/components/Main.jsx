@@ -52,8 +52,18 @@ function Main() {
     function changeCount(id, count) {
         for (let item of cart) {
             if (item.id == id) {
+                let index = cart.indexOf(item);
+                cart[index] = { ...item, count: count };
+                setCart([...cart]);
+            }
+        }
+    }
+
+    function deleteCartItem(id) {
+        for (let item of cart) {
+            if (item.id == id) {
                 let newCart = cart.filter((elt) => elt.id != item.id);
-                setCart([...newCart, { ...item, count: count }]);
+                setCart([...newCart]);
             }
         }
     }
@@ -82,6 +92,7 @@ function Main() {
                     toggleCartVisibility={toggleCartVisibility}
                     cart={cart}
                     changeCount={changeCount}
+                    deleteCartItem={deleteCartItem}
                 />
             ) : null}
         </>
