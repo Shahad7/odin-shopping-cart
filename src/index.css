@@ -1,10 +1,11 @@
+@font-face {
+    font-family: "GT walsheim";
+    src: url(./assets/gtwp.woff);
+}
+
 body {
     margin: 0;
     padding: 0;
-}
-
-.image-wrapper {
-    max-width: 300px;
 }
 
 #cart {
@@ -59,6 +60,7 @@ body {
 }
 
 #navbar {
+    font-family: "GT walsheim", sans-serif;
     background-color: #1f1f1f;
     height: 90px;
     display: flex;
@@ -117,6 +119,7 @@ body {
     position: relative;
     height: 13px;
     width: 13px;
+    font-weight: bold;
     top: -12px;
     right: -36px;
     color: black;
@@ -158,34 +161,39 @@ body {
 }
 
 #card {
+    font-family: "GT walsheim", sans-serif;
     background-color: #1f1f1f;
     border-radius: 15px;
-    max-width: 300px;
-    max-height: 325.5px;
+    max-width: 350px;
+    max-height: 340px;
 }
 
 #card-info {
     display: flex;
     flex-direction: column;
     padding: 16px;
+    max-height: 152.75px;
 }
 
 .card-image {
-    max-width: 300px;
+    max-width: 350px;
     aspect-ratio: 1.79/1;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
 
 #card-title {
-    font-size: larger;
+    font-size: 20px;
     font-weight: bold;
 }
 
 #card-price {
+    font-size: 16px;
     align-self: end;
-    font-size: larger;
     font-weight: bold;
+    letter-spacing: 1.2px;
+    color: #3bd5ff;
+    justify-self: end;
 }
 
 #shop {
@@ -193,4 +201,60 @@ body {
     flex-wrap: wrap;
     gap: 50px;
     padding: 50px;
+}
+
+#screenshot-img {
+    margin-top: 0;
+    max-width: 65vw;
+    border-radius: 35px;
+}
+
+#game-info {
+    font-family: "GT walsheim", sans-serif;
+    padding: 0 40px 40px 40px;
+}
+
+#info-name {
+    margin-left: 6px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#screenshots {
+    max-width: 65vw;
+    display: grid;
+    align-items: center;
+}
+
+#prev,
+#next {
+    height: 140px;
+    position: absolute;
+    cursor: pointer;
+}
+
+#prev {
+    justify-self: flex-start;
+}
+#next {
+    justify-self: flex-end;
+}
+
+#info-desc-title {
+    margin-top: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+#info-desc {
+    color: #c1c7d4;
+    white-space: pre-wrap;
+}
+
+#info-desc-main {
+    padding: 0 50px;
+}
+
+#info-main {
+    display: flex;
+    align-items: start;
 }

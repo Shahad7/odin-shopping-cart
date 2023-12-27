@@ -51,21 +51,27 @@ function GameInfo() {
                 <p>loading...</p>
             ) : (
                 <>
-                    <p>{info.name + "\t\t" + "$" + info.price}</p>
-                    <Screenshots
-                        cartVisibility={cartVisibility}
-                        gameId={gameId}
-                    />
-                    <div style={{ whiteSpace: "pre" }}>
-                        {info.description
-                            .split(/<br\s*\/?>|<p>/gi)
-                            .join("")
-                            .split("</p>")
-                            .join("\n")
-                            .split("&#39;")
-                            .join("'")}
+                    <p id="info-name">{info.name}</p>
+                    <div id="info-main">
+                        <Screenshots
+                            cartVisibility={cartVisibility}
+                            gameId={gameId}
+                        />
+                        <div id="info-desc-main">
+                            <p id="info-desc-title">Description</p>
+                            <div id="info-desc">
+                                {info.description
+                                    .split(/<br\s*\/?>|<p>/gi)
+                                    .join("")
+                                    .split("</p>")
+                                    .join("\n")
+                                    .split("&#39;")
+                                    .join("'")}
+                            </div>
+                        </div>
                     </div>
                     <button onClick={handleAddToCart}>add to cart</button>
+                    <p>{"$" + info.price}</p>
                 </>
             )}
         </div>

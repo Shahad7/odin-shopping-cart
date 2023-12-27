@@ -1,5 +1,7 @@
 import "../index.css";
 import { useState, useEffect } from "react";
+import prevIcon from "../assets/prev.svg";
+import nextIcon from "../assets/next.svg";
 
 function Screenshots({ gameId, cartVisibility }) {
     const [pics, setPics] = useState([]);
@@ -14,8 +16,8 @@ function Screenshots({ gameId, cartVisibility }) {
                     throw new Error("couldn't fetch the images");
                 const data = await response.json();
                 const extract = data.results.map((elt) => (
-                    <div className="image-wrapper">
-                        <img src={elt.image} />
+                    <div>
+                        <img id="screenshot-img" src={elt.image} />
                     </div>
                 ));
                 setPics(extract);
@@ -36,13 +38,9 @@ function Screenshots({ gameId, cartVisibility }) {
     }
     return (
         <div id="screenshots">
-            <button id="prev" onClick={slideImage}>
-                prev
-            </button>
+            <img id="prev" src={prevIcon} onClick={slideImage} />
             {pics[imageIndex]}
-            <button id="next" onClick={slideImage}>
-                next
-            </button>
+            <img id="next" src={nextIcon} onClick={slideImage} />
         </div>
     );
 }
