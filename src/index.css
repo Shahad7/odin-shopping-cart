@@ -224,6 +224,7 @@ body {
     max-width: 65vw;
     display: grid;
     align-items: center;
+    margin-right: 30px;
 }
 
 #prev,
@@ -250,11 +251,42 @@ body {
     white-space: pre-wrap;
 }
 
-#info-desc-main {
-    padding: 0 50px;
+#info-desc-container {
+    display: grid;
+    grid-template: auto/auto 5px;
+    max-height: 45vh;
 }
 
+#info-desc-main {
+    grid-area: 1/1/-1/2;
+    padding: 0 50px 10px 20px;
+    max-height: 45vh;
+    overflow-y: scroll;
+    background: linear-gradient(black, #2c2a2a);
+    border-bottom-left-radius: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#info-desc-main::-webkit-scrollbar {
+    display: none;
+}
 #info-main {
     display: flex;
     align-items: start;
+}
+
+#scrollbar {
+    grid-area: 1/2/2/-1;
+    height: 100%;
+    width: 4px;
+    justify-self: end;
+    background-color: #696969;
+}
+
+#scroll-thumb {
+    position: relative;
+    background-color: #3bd5ff;
+    height: 50px;
+    width: 4px;
 }

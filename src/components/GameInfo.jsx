@@ -31,6 +31,25 @@ function GameInfo() {
             }
         }
         fetchInfo();
+
+        //recursively calls itself to detect if the required dom elements for computation have loaded
+        function handleScrollThumbSize() {
+            let scrollThumb = document.getElementById("scroll-thumb");
+            let scrollContent = document.getElementById("info-desc-main");
+            if (scrollContent && scrollThumb) {
+                setTimeout(() => {
+                    let scrollHeight = parseInt(scrollContent.scrollHeight);
+                    let offsetHeight = parseInt(scrollContent.offsetHeight);
+                    scrollThumb.style.height =
+                        (offsetHeight / scrollHeight) * offsetHeight + "px";
+                }, 1000);
+            } else {
+                setTimeout(handleScrollThumbSize, 0);
+            }
+        }
+        handleScrollThumbSize();
+        //to change scrollbar thumb size when window size changes
+        window.addEventListener("resize", handleScrollThumbSize);
     }, []);
 
     function handleAddToCart() {
@@ -41,6 +60,17 @@ function GameInfo() {
             price: info.price,
         });
         toggleCartVisibility();
+    }
+
+    function handleScroll(e) {
+        let scrollThumb = document.getElementById("scroll-thumb");
+        let scrollTop = parseInt(e.target.scrollTop);
+        let offsetHeight = parseInt(e.target.offsetHeight);
+        let scrollHeight = parseInt(e.target.scrollHeight);
+        scrollThumb.style.height =
+            (offsetHeight / scrollHeight) * offsetHeight + "px";
+        scrollThumb.style.top =
+            (scrollTop / scrollHeight) * offsetHeight + "px";
     }
 
     return (
@@ -57,16 +87,21 @@ function GameInfo() {
                             cartVisibility={cartVisibility}
                             gameId={gameId}
                         />
-                        <div id="info-desc-main">
-                            <p id="info-desc-title">Description</p>
-                            <div id="info-desc">
-                                {info.description
-                                    .split(/<br\s*\/?>|<p>/gi)
-                                    .join("")
-                                    .split("</p>")
-                                    .join("\n")
-                                    .split("&#39;")
-                                    .join("'")}
+                        <div id="info-desc-container">
+                            <div id="scrollbar">
+                                <div id="scroll-thumb"></div>
+                            </div>
+                            <div id="info-desc-main" onScroll={handleScroll}>
+                                <p id="info-desc-title">Description</p>
+                                <div id="info-desc">
+                                    {info.description
+                                        .split(/<br\s*\/?>|<p>/gi)
+                                        .join("")
+                                        .split("</p>")
+                                        .join("\n")
+                                        .split("&#39;")
+                                        .join("'")}
+                                </div>
                             </div>
                         </div>
                     </div>
