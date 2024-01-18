@@ -9,6 +9,7 @@ function GameInfo() {
     const [error, setError] = useState(false);
     const [addToCart, toggleCartVisibility, cartVisibility] =
         useOutletContext();
+    const [mouseState, setMouseState] = useState("release");
 
     useEffect(() => {
         async function fetchInfo() {
@@ -63,6 +64,7 @@ function GameInfo() {
     }
 
     function handleScroll(e) {
+        e.preventDefault();
         let scrollThumb = document.getElementById("scroll-thumb");
         let scrollTop = parseInt(e.target.scrollTop);
         let offsetHeight = parseInt(e.target.offsetHeight);
@@ -73,8 +75,40 @@ function GameInfo() {
             (scrollTop / scrollHeight) * offsetHeight + "px";
     }
 
+    function handleScrollPress(e) {
+        e.preventDefault();
+        console.log(e);
+        setMouseState("hold");
+    }
+
+    function handleScrollOver(e) {
+        e.preventDefault();
+        if (mouseState == "hold") {
+            let scrollThumb = document.getElementById("scroll-thumb");
+            let scrollbarHeight = parseInt(
+                document.getElementById("scrollbar").clientHeight
+            );
+            let scrollThumbHeight = parseInt(scrollThumb.style.height);
+            let delta = parseInt(e.clientY) - scrollThumbHeight;
+            if (delta > 0 && delta < scrollbarHeight - scrollThumbHeight)
+                scrollThumb.style.top = delta + "px";
+        }
+    }
+
+    function handleScrollRelease(e) {
+        e.preventDefault();
+        if (mouseState == "hold") {
+            setMouseState("release");
+        }
+    }
+
     return (
-        <div className="main-body" id="game-info">
+        <div
+            className="main-body"
+            id="game-info"
+            onMouseUp={handleScrollRelease}
+            onMouseMove={handleScrollOver}
+        >
             {error ? (
                 <p>{error.message}</p>
             ) : loading ? (
@@ -87,26 +121,43 @@ function GameInfo() {
                             cartVisibility={cartVisibility}
                             gameId={gameId}
                         />
-                        <div id="info-desc-container">
-                            <div id="scrollbar">
-                                <div id="scroll-thumb"></div>
-                            </div>
-                            <div id="info-desc-main" onScroll={handleScroll}>
-                                <p id="info-desc-title">Description</p>
-                                <div id="info-desc">
-                                    {info.description
-                                        .split(/<br\s*\/?>|<p>/gi)
-                                        .join("")
-                                        .split("</p>")
-                                        .join("\n")
-                                        .split("&#39;")
-                                        .join("'")}
+                        <div id="desc-w-cart">
+                            <div id="info-desc-container">
+                                <div id="scrollbar">
+                                    <div
+                                        id="scroll-thumb"
+                                        onMouseDown={handleScrollPress}
+                                    ></div>
                                 </div>
+                                <div
+                                    id="info-desc-main"
+                                    onScroll={handleScroll}
+                                >
+                                    <p id="info-desc-title" draggable="false">
+                                        Description
+                                    </p>
+                                    <div id="info-desc" draggable="false">
+                                        {info.description
+                                            .split(/<br\s*\/?>|<p>/gi)
+                                            .join("")
+                                            .split("</p>")
+                                            .join("\n")
+                                            .split("&#39;")
+                                            .join("'")}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="add-to-cart-sec">
+                                <p id="info-price">{"$" + info.price}</p>
+                                <button
+                                    id="add-to-cart-btn"
+                                    onClick={handleAddToCart}
+                                >
+                                    Add to cart +
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <button onClick={handleAddToCart}>add to cart</button>
-                    <p>{"$" + info.price}</p>
                 </>
             )}
         </div>
