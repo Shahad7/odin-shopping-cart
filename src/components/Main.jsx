@@ -25,7 +25,7 @@ function Main() {
     function showCart() {
         let main = document.getElementById("main");
         main.style.pointerEvents = "none";
-        main.style.filter = "blur(2px)";
+        main.style.filter = "brightness(0.6)";
         setCartVisibility((prevState) => !prevState);
     }
 

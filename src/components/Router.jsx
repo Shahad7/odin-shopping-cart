@@ -7,6 +7,7 @@ import Main from "./Main";
 import Shop from "./Shop";
 import GameInfo from "./GameInfo";
 import Home from "./Home";
+import Loading from "./Loading";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "shop/:gameId",
                 element: <GameInfo />,
+            },
+            {
+                path: "loading",
+                element: <Loading />,
             },
         ],
     },

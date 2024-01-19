@@ -1,4 +1,6 @@
 import "../index.css";
+import Icon from "@mdi/react";
+import { mdiCloseThick } from "@mdi/js";
 import CartItem from "./CartItem";
 
 function Cart({ toggleCartVisibility, cart, changeCount, deleteCartItem }) {
@@ -19,18 +21,22 @@ function Cart({ toggleCartVisibility, cart, changeCount, deleteCartItem }) {
     calculateSubtotal();
     return (
         <div id="cart">
-            <button
+            <Icon
+                className={"close-cart-btn"}
+                color={"lightgray"}
                 onClick={() => {
                     toggleCartVisibility();
                 }}
-            >
-                {" "}
-                close
-            </button>
-            {listCartItems}
+                path={mdiCloseThick}
+                size={1}
+            />
+            <div id="cart-list">{listCartItems}</div>
             <div id="checkout">
-                <p>Subtotal:{subtotal.toFixed(2)}</p>
-                <button id="checkout-btn">checkout</button>
+                <div id="subtotal">
+                    <p>Subtotal:</p>
+                    <p>{"$" + subtotal.toFixed(2)}</p>
+                </div>
+                <button id="checkout-btn">Checkout</button>
             </div>
         </div>
     );

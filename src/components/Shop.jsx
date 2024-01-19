@@ -1,6 +1,8 @@
 import "../index.css";
 import { useState, useEffect } from "react";
 import Card from "./Card";
+import Loading from "./Loading";
+
 import { Outlet } from "react-router-dom";
 
 function Shop() {
@@ -14,7 +16,7 @@ function Shop() {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    "https://api.rawg.io/api/games?key=9932e90df0a143d2a577d6c23771f864&page_size=9&page=1"
+                    "https://api.rawg.io/api/games?key=9932e90df0a143d2a577d6c23771f864&page_size=12&page=1"
                 );
                 if (response.status >= 400)
                     throw new Error("couldn't fetch data");
@@ -57,7 +59,7 @@ function Shop() {
             ) : !loading ? (
                 listGames
             ) : (
-                <p>loading ....</p>
+                <Loading />
             )}
         </div>
     );

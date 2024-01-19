@@ -1,6 +1,7 @@
 import "../index.css";
 import { useParams, useOutletContext } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Loading from "./Loading";
 import Screenshots from "./Screenshots";
 function GameInfo() {
     const { gameId } = useParams();
@@ -112,7 +113,7 @@ function GameInfo() {
             {error ? (
                 <p>{error.message}</p>
             ) : loading ? (
-                <p>loading...</p>
+                <Loading />
             ) : (
                 <>
                     <p id="info-name">{info.name}</p>

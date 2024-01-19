@@ -1,5 +1,7 @@
 import "../index.css";
 import { useState } from "react";
+import Icon from "@mdi/react";
+import { mdiTrashCanOutline } from "@mdi/js";
 
 function CartItem({ itemInfo, changeCount, deleteCartItem }) {
     const [count, setCount] = useState(itemInfo.count);
@@ -17,19 +19,29 @@ function CartItem({ itemInfo, changeCount, deleteCartItem }) {
     }
     return (
         <div className="cart-item">
-            <p>{itemInfo.name}</p>
             <img src={itemInfo.image} className="cart-item-img" alt="" />
-            <button onClick={decreaseCount}>-</button>
-            <p className="cart-item-count">{count}</p>
-            <button onClick={increaseCount}>+</button>
-            {/*gotta replace this a trash icon later*/}
-            <button
-                onClick={() => {
-                    deleteCartItem(itemInfo.id);
-                }}
-            >
-                delete
-            </button>
+            <div className="cart-item-info">
+                <div className="title-w-del">
+                    <p>{itemInfo.name}</p>
+                    <Icon
+                        className="delete-item-btn"
+                        path={mdiTrashCanOutline}
+                        onClick={() => {
+                            deleteCartItem(itemInfo.id);
+                        }}
+                        size={1}
+                    />
+                </div>
+                <div className="count-w-price">
+                    <p id="item-price">{"$" + itemInfo.price}</p>
+                    <div className="count-btn-grp">
+                        <button onClick={decreaseCount}>-</button>
+                        <div className="cart-item-count">{count}</div>
+                        <button onClick={increaseCount}>+</button>
+                    </div>
+                </div>
+                {/*gotta replace this a trash icon later*/}
+            </div>
         </div>
     );
 }
