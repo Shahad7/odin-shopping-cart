@@ -31,9 +31,13 @@ function Main() {
 
     function hideCart() {
         let main = document.getElementById("main");
+        let cart = document.getElementById("cart");
         main.style.pointerEvents = "auto";
         main.style.filter = "none";
-        setCartVisibility((prevState) => !prevState);
+        cart.style.transform = "translateX(110%)";
+        setTimeout(() => {
+            setCartVisibility((prevState) => !prevState);
+        }, 1000);
     }
 
     function handleBodyClick(e) {
@@ -63,6 +67,9 @@ function Main() {
         for (let item of cart) {
             if (item.id == id) {
                 let newCart = cart.filter((elt) => elt.id != item.id);
+                if (newCart.length == 0) {
+                    toggleCartVisibility();
+                }
                 setCart([...newCart]);
             }
         }
@@ -91,6 +98,7 @@ function Main() {
                 <Cart
                     toggleCartVisibility={toggleCartVisibility}
                     cart={cart}
+                    cartVisibility={cartVisibility}
                     changeCount={changeCount}
                     deleteCartItem={deleteCartItem}
                 />

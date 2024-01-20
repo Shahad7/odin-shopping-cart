@@ -15,11 +15,7 @@ function Screenshots({ gameId, cartVisibility }) {
                 if (response.status >= 400)
                     throw new Error("couldn't fetch the images");
                 const data = await response.json();
-                const extract = data.results.map((elt) => (
-                    <div>
-                        <img id="screenshot-img" src={elt.image} />
-                    </div>
-                ));
+                const extract = data.results.map((elt) => elt.image);
                 setPics(extract);
             } catch (err) {
                 console.error(err);
@@ -27,6 +23,29 @@ function Screenshots({ gameId, cartVisibility }) {
         }
         fetchImages();
     }, []);
+    const listImages = pics.map((elt) => {
+        let index = pics.indexOf(elt);
+        if (index == imageIndex)
+            return (
+                <img
+                    className="screenshot-img"
+                    src={elt}
+                    key={index}
+                    id={index}
+                    style={{ display: "block" }}
+                ></img>
+            );
+        else
+            return (
+                <img
+                    className="screenshot-img"
+                    src={elt}
+                    key={index}
+                    id={index}
+                    style={{ display: "none" }}
+                ></img>
+            );
+    });
 
     function slideImage(e) {
         let count = pics.length;
@@ -39,7 +58,7 @@ function Screenshots({ gameId, cartVisibility }) {
     return (
         <div id="screenshots">
             <img id="prev" src={prevIcon} onClick={slideImage} />
-            {pics[imageIndex]}
+            {listImages}
             <img id="next" src={nextIcon} onClick={slideImage} />
         </div>
     );

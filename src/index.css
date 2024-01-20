@@ -34,6 +34,9 @@ body {
 }
 
 #cart {
+    display: flex;
+    flex-direction: column;
+    transform: translateX(110%);
     position: fixed;
     padding-top: 40px;
     width: clamp(400px, 33vw, 600px);
@@ -42,19 +45,20 @@ body {
     right: 0;
     top: 0;
     height: 100vh;
+    transition: transform 300ms ease-in-out 100ms;
 }
 
 #cart-list {
-    height: 80vh;
+    flex-grow: 1;
     overflow-y: scroll;
 }
 
 #checkout {
+    flex-shrink: 0;
     padding: 0 80px;
     box-sizing: border-box;
+    height: clamp(180px, 22vh, 200px);
     width: inherit;
-    bottom: 0;
-    height: 20vh;
     border-top: solid 1px white;
 }
 
@@ -316,8 +320,9 @@ body {
     padding: 64px;
 }
 
-#screenshot-img {
+.screenshot-img {
     margin-top: 0;
+    aspect-ratio: 1.79/1;
     width: 65vw;
     border-radius: 35px;
 }
@@ -343,7 +348,7 @@ body {
 
 #prev,
 #next {
-    height: 140px;
+    height: min(140px, 10vw);
     position: absolute;
     cursor: pointer;
 }
@@ -487,7 +492,8 @@ body {
 }
 
 #inner-circle {
-    position: absolute;
+    position: fixed;
+    top: 40%;
     z-index: 1;
     width: 9vw;
     height: 9vw;
@@ -497,4 +503,11 @@ body {
     border-bottom: solid 5px transparent;
     border-radius: 100px;
     animation: spin 1s linear 0ms infinite;
+}
+
+#empty-msg {
+    display: none;
+    text-align: center;
+    font-family: "GT walsheim", sans-serif;
+    color: white;
 }
