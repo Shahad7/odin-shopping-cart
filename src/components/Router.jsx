@@ -1,5 +1,6 @@
 import {
     createBrowserRouter,
+    createHashRouter,
     createMemoryRouter,
     RouterProvider,
 } from "react-router-dom";
@@ -9,7 +10,7 @@ import GameInfo from "./GameInfo";
 import Home from "./Home";
 import Loading from "./Loading";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/",
         element: <Main />,
