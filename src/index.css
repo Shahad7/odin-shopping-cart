@@ -349,16 +349,19 @@ body {
 
 #prev,
 #next {
-    height: min(140px, 10vw);
+    height: 10px;
+    transform: scale(18);
     position: absolute;
     cursor: pointer;
 }
 
 #prev {
     justify-self: flex-start;
+    margin-left: 2vw;
 }
 #next {
     justify-self: flex-end;
+    margin-right: 2vw;
 }
 
 #info-desc-title {
@@ -513,6 +516,13 @@ body {
     color: white;
 }
 
+@media (max-width: 800px) {
+    #prev,
+    #next {
+        transform: scale(10);
+    }
+}
+
 @media (max-width: 500px) {
     #shop {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -520,6 +530,15 @@ body {
 
     .mdi-icon {
         width: 32px;
+    }
+
+    #prev,
+    #next {
+        transform: scale(6);
+    }
+
+    #next {
+        margin-right: -6vw;
     }
 
     #cart-button:hover,
