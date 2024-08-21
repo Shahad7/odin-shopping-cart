@@ -1,7 +1,7 @@
 import "../index.css";
 import { useState, useEffect } from "react";
-import prevIcon from "../assets/prev.svg";
-import nextIcon from "../assets/next.svg";
+import prevIcon from "../assets/prev.png";
+import nextIcon from "../assets/next.png";
 
 function Screenshots({ gameId, cartVisibility }) {
     const [pics, setPics] = useState([]);
