@@ -45,6 +45,7 @@ body {
     right: 0;
     top: 0;
     height: 100vh;
+    max-height: 100vh;
     transition: transform 300ms ease-in-out 100ms;
 }
 
