@@ -536,9 +536,29 @@ body {
         margin-right: 19px;
     }
 
-    #visit-store-btn {
+    #visit-store-btn,
+    #checkout-btn {
         padding: 20px 25px;
         font-size: 18px;
+    }
+
+    #empty-msg {
+        margin-left: 9px;
+    }
+    .screenshot-img {
+        width: 76vw;
+    }
+
+    #screenshots {
+        margin-bottom: 60px;
+    }
+
+    .add-to-cart-sec {
+        margin-top: 65px;
+    }
+
+    #checkout {
+        padding: 0 60px 0 110px;
     }
 }
 
