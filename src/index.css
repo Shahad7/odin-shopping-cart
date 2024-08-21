@@ -511,3 +511,22 @@ body {
     font-family: "GT walsheim", sans-serif;
     color: white;
 }
+
+@media (max-width: 500px) {
+    #shop {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .navbar-items > * {
+        margin-left: 10px;
+    }
+
+    #cart-button,
+    #shop-button {
+        padding-right: 0;
+    }
+
+    #navbar {
+        padding: 0 25px;
+    }
+}
