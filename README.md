@@ -1,3 +1,3 @@
 # odin-shopping-cart
 
-Live Demo :- https://github.com/Shahad7/odin-shopping-cart
+Live Demo :- https://shahad7.github.io/odin-shopping-cart/
